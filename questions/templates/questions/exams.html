@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagina principale</title>
+</head>
+<body>
+{% include 'questions/navbar.html' %}
 <form action="{% url 'questions:exams' %}" method="post">
     {% csrf_token %}
     <label for="exam">Esame: </label><input type="text" name="exam" id="exam" required>
@@ -54,3 +62,5 @@
 
 
 </script>
+</body>
+</html>

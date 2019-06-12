@@ -1,7 +1,6 @@
 import random
 
 # Create your views here.
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.template.defaulttags import register
@@ -10,7 +9,7 @@ from questions.models import Answer, Question, Exam
 
 
 def index(request):
-  return HttpResponse("Hello, world. You're at questions index")
+  return render(request, 'questions/index.html')
 
 
 def insert_question(request):

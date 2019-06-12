@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagina principale</title>
+</head>
+<body>
+{% include 'questions/navbar.html' %}
 <div id="question">{{ question.question_text }}</div>
 
 <form onSubmit="event.preventDefault(); validate()">
@@ -33,3 +41,5 @@
     }
 
 </script>
+</body>
+</html>
