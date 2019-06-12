@@ -1,0 +1,35 @@
+<div id="question">{{ question.question_text }}</div>
+
+<form onSubmit="event.preventDefault(); validate()">
+
+
+    {% for answer in answers %}
+        <input type="radio" name="answer" id="answer{{ forloop.counter }}" value="{{ answer.correct }}" required>
+        <label onClick="selectButton(this)" for="answer{{ forloop.counter }}">{{ answer.answer_text }}</label><br>
+    {% endfor %}
+
+    <input type="submit" value="Vote">
+</form>
+<form><input type="submit" value="Next"></form>
+<div id="result"></div>
+
+<script>
+
+    function validate() {
+        var correct = "Risposta esatta";
+        var wrong = "Risposta sbagliata";
+        var score = document.querySelector('input[name="answer"]:checked').value;
+        if (score === "True") {
+            document.getElementById('result').innerText = correct;
+        } else {
+            document.getElementById('result').innerText = wrong;
+        }
+        return false;
+    }
+
+    function selectButton(element) {
+        element.control.checked = true;
+
+    }
+
+</script>

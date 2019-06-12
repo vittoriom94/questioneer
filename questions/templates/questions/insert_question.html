@@ -1,0 +1,28 @@
+<form action="{% url 'questions:insert_question' %}" method="post">
+    {% csrf_token %}
+    <label for="question">Domanda: </label><input type="text" name="question" id="question" required>
+    <label>
+        <select name="exam" required>
+            {% for exam in exams %}
+                <option value="{{ exam.id }}">{{ exam.exam_name }}</option>
+            {% endfor %}
+        </select>
+    </label>
+
+    <br>
+    <label for="answer1">Risposta 1: </label><input type="text" name="answer1" id="answer1" required>
+    <input type="radio" name="correct" id="answer1" value="1" required><br>
+    <label for="answer2">Risposta 2: </label><input type="text" name="answer2" id="answer2" required>
+    <input type="radio" name="correct" id="answer2" value="2" required><br>
+    <label for="answer3">Risposta 3: </label><input type="text" name="answer3" id="answer3" required>
+    <input type="radio" name="correct" id="answer3" value="3" required><br>
+    <label for="answer4">Risposta 4: </label><input type="text" name="answer4" id="answer4" required>
+    <input type="radio" name="correct" id="answer4" value="4" required><br>
+
+    <input type="submit" value="Insert">
+
+</form>
+{% if inserted %}
+    <div id="inserted">Domanda inserita con successo!</div>
+{% endif %}
+

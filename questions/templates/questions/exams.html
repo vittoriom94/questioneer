@@ -1,0 +1,56 @@
+<form action="{% url 'questions:exams' %}" method="post">
+    {% csrf_token %}
+    <label for="exam">Esame: </label><input type="text" name="exam" id="exam" required>
+
+    <br>
+    <label for="active">Abilitato: </label>
+    <input type="checkbox" name="active" id="active" value="active" checked><br>
+
+
+    <input type="submit" value="Insert">
+
+</form>
+{% if inserted %}
+    <div id="inserted">Esame inserito con successo!</div>
+{% endif %}
+
+
+<table>
+    <thead>
+    <tr>
+        <th>Esame</th>
+        <th>Abilitato</th>
+        <th>Azioni</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for exam in exams %}
+        <tr>
+            <td>{{ exam.exam_name }}</td>
+            <td>{{ exam.active }}</td>
+            <td>
+                <button onclick="editExam(this,'delete')" id='{{ exam.id }}' type="button">X</button>
+                <button onclick="editExam(this,'enable')" id='{{ exam.id }}' type="button">R</button>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+<form style="visibility: hidden" method="POST" action="{% url 'questions:exams' %}" id="hiddenForm">
+    {% csrf_token %}
+</form>
+<script>
+    function editExam(element, action) {
+        var input = document.createElement('input');
+        input.name = action;
+        input.value = element.id;
+        var form = document.getElementById("hiddenForm");
+        form.appendChild(input);
+        form.submit(); // send the payload and navigate
+    }
+
+
+</script>

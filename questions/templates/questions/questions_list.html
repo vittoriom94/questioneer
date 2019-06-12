@@ -1,0 +1,52 @@
+<table>
+    <thead>
+    <tr>
+        <th>Domanda</th>
+        <th>Esame</th>
+        <th>Azioni</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for question in questions %}
+        <tr>
+            <td>
+                <table id="fullQuestion">
+                    <tr>
+                        <td>{{ question.question_text }}</td>
+                    </tr>
+                    {% for answer in  answers|get_item:question.id %}
+                        {% if answer.correct == True %}
+                            <tr>
+                                <td><b>{{ answer.answer_text }}</b></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>{{ answer.answer_text }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </td>
+            <td>{{ question.exam.exam_name }}</td>
+            <td>
+                <button onclick="editQuestion(this,'delete')" id='{{ question.id }}' type="button">X</button>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<form style="visibility: hidden" method="POST" action="{% url 'questions:questions_list' %}" id="hiddenForm">
+    {% csrf_token %}
+</form>
+<script>
+    function editQuestion(element, action) {
+        var input = document.createElement('input');
+        input.name = action;
+        input.value = element.id;
+        var form = document.getElementById("hiddenForm");
+        form.appendChild(input);
+        form.submit(); // send the payload and navigate
+    }
+
+</script>
