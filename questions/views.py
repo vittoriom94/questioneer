@@ -26,6 +26,7 @@ def insert_question(request):
       answer = Answer(answer_text=answer_text, correct=correct, question=question)
       answer.save()
     context['inserted'] = True
+    context['last_exam'] = exam_id
   exams = Exam.objects.all()
   context['exams'] = exams
   return render(request, 'questions/insert_question.html', context)

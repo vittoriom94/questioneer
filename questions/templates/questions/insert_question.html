@@ -20,7 +20,7 @@
                     <label for="question">Domanda: </label><input type="text" class="form-control" name="question"
                                                                   id="question" required>
                     <label>
-                        <select name="exam" required>
+                        <select name="exam" id="exam_select" required>
                             {% for exam in exams %}
                                 <option value="{{ exam.id }}">{{ exam.exam_name }}</option>
                             {% endfor %}
@@ -67,6 +67,17 @@
         </div>
     </div>
 </div>
+{% if last_exam %}
+    <script>
+        selectLastExam();
+
+        function selectLastExam() {
+            var optionValue = {{ last_exam }};
+            document.getElementById('exam_select').value = optionValue;
+        }
+
+    </script>
+{% endif %}
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
