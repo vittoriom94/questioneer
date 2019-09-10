@@ -6,6 +6,7 @@ from django.db import models
 class Exam(models.Model):
   exam_name = models.CharField(max_length=50)
   active = models.BooleanField(default=True)
+  lastQuestion = models.IntegerField(default=0)
 
 
 class Question(models.Model):

@@ -37,7 +37,20 @@ def question(request):
   questions = Question.objects.filter(exam__active=True)
   if not questions:
     return render(request, 'questions/question.html')
-  question = random.choice(questions)
+  # i need to get the index of the last question and save it +1
+  # exam = get_object_or_404(Exam, exam_name=questions.first().exam)
+  exam = questions.first().exam
+  i = 0
+  for question in questions:
+    if i == exam.lastQuestion:
+      if exam.lastQuestion == questions.count()-1:
+        exam.lastQuestion = 0
+      else:
+        exam.lastQuestion+=1
+      exam.save()
+      break
+    i+=1
+
   context['question'] = question
   answers = Answer.objects.filter(question=question)
   context['answers'] = answers
